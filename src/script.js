@@ -25,11 +25,21 @@ function initGrid(gridId, data) {
     });
 }
 
+// Initialize Dropdown
+function initDropdown(selectId, data) {
+    const select = document.getElementById(selectId);
+    data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.val;
+        option.innerText = item.name;
+        select.appendChild(option);
+    });
+}
+
 function calculateResults() {
     const why = document.getElementById('q1-input').value;
     const q2Btns = document.querySelectorAll('#q2-grid .active');
-    const q3Btns = document.querySelectorAll('#q3-grid .active');
-    
+
     let score = 0;
     
     // Average complexity of selected products/stacks
@@ -38,13 +48,8 @@ function calculateResults() {
         q2Btns.forEach(b => q2Total += parseInt(b.dataset.value));
         score += (q2Total / q2Btns.length);
     }
-    
-    if(q3Btns.length) {
-        let q3Total = 0;
-        q3Btns.forEach(b => q3Total += parseInt(b.dataset.value));
-        score += (q3Total / q3Btns.length);
-    }
 
+    score += parseInt(document.getElementById('q3-select').value);
     score += parseInt(document.getElementById('q4-select').value);
     score += parseInt(document.getElementById('q5-select').value);
 
@@ -87,4 +92,4 @@ setInterval(() => {
 }, 1000);
 
 initGrid('q2-grid', products);
-initGrid('q3-grid', stacks);
+initDropdown('q3-select', stacks);

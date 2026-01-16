@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia Digital | Project Estimator</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="asset/gaiada.jpeg" alt="Gaia Logo" class="logo">
+            <h1>Project Scope Matrix</h1>
+        </header>
+
+        <section id="discovery-form">
+            <div class="card">
+                <label class="question-label">1. The "Why"</label>
+                <p class="helper-text">If your website was your only employee working 24/7, what is the single most important 'job' it must perform to make your business thrive this year?</p>
+                <textarea id="q1-input" placeholder="Enter client's verbatim response here..."></textarea>
+            </div>
+
+            <div class="card">
+                <label class="question-label">2. Web Product Catalog (Select Multiple)</label>
+                <div class="button-grid" id="q2-grid">
+                    </div>
+            </div>
+
+            <div class="card">
+                <label class="question-label">3. Tech Stack Selection (Select Multiple)</label>
+                <div class="button-grid" id="q3-grid">
+                    </div>
+            </div>
+
+            <div class="card">
+                <label class="question-label">4. User Interaction & Complexity</label>
+                <select id="q4-select">
+                    <option value="2">Static Consumption (Information only)</option>
+                    <option value="5">Basic Input (Forms/Search)</option>
+                    <option value="8">Advanced Filtering (Dynamic sorting)</option>
+                    <option value="12">User State (Profiles/Logins)</option>
+                    <option value="15">Dynamic Transactional (Real-time/Live)</option>
+                </select>
+            </div>
+
+            <div class="card">
+                <label class="question-label">5. Security & Compliance</label>
+                <select id="q5-select">
+                    <option value="2">Public Standard (SSL)</option>
+                    <option value="5">GDPR/Privacy Plus</option>
+                    <option value="10">Transaction Secure (PCI)</option>
+                    <option value="15">Sensitive Data (Encryption)</option>
+                    <option value="20">Enterprise Grade (SSO/Firewalls)</option>
+                </select>
+            </div>
+
+            <button onclick="calculateResults()" class="btn-calculate">Generate Gaia Strategy</button>
+        </section>
+
+        <section id="results" class="hidden">
+            <div class="result-card">
+                <h2>Project Implementation Strategy</h2>
+                <div id="result-content">
+                    </div>
+                <div class="actions">
+                    <button onclick="window.print()" class="btn-print">Print to PDF</button>
+                    <button onclick="location.reload()" class="btn-secondary">New Assessment</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-info">
+                <span>Visitors: <strong id="visitor-count">1,248</strong></span>
+                <span>Location: <strong>Denpasar, Bali</strong></span>
+                <span>Current Time: <strong id="current-time"></strong></span>
+            </div>
+        </footer>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+</html>

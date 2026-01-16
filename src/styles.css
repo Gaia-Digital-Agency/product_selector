@@ -1,0 +1,109 @@
+:root {
+    --primary: #00f2fe;
+    --secondary: #4facfe;
+    --bg: #0b0e14;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text: #ffffff;
+    --accent: #7000ff;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+header { text-align: center; margin-bottom: 40px; }
+.logo { height: 50px; margin-bottom: 10px; filter: brightness(0) invert(1); }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.question-label { display: block; font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; color: var(--primary); }
+.helper-text { font-size: 0.9rem; color: #ccc; margin-bottom: 15px; }
+
+textarea, select {
+    width: 100%;
+    background: #1a1f26;
+    border: 1px solid #333;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.selectable-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #444;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.selectable-btn.active {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-calculate {
+    width: 100%;
+    padding: 18px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(112, 0, 255, 0.3);
+}
+
+.hidden { display: none; }
+
+#results { margin-top: 40px; }
+.result-card { border-left: 5px solid var(--primary); background: #151a21; padding: 40px; border-radius: 20px; }
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.8rem;
+    color: #666;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-info span { margin: 0 15px; }
+
+@media print {
+    .btn-calculate, .btn-secondary, .button-grid, select, .helper-text, footer { display: none !important; }
+    .card { border: none; background: white; color: black; }
+    .question-label { color: black; }
+    textarea { border: none; background: transparent; color: black; }
+}

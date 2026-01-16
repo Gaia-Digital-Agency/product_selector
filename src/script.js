@@ -12,6 +12,43 @@ const stacks = [
     { name: "Headless CMS", val: 11 }, { name: "Next.js", val: 10 }
 ];
 
+// Save form data to sessionStorage
+function saveFormData() {
+    const formData = {
+        q1: document.getElementById('q1-input').value,
+        q2: Array.from(document.querySelectorAll('#q2-grid .active')).map(btn => btn.innerText),
+        q3: document.getElementById('q3-select').value,
+        q4: document.getElementById('q4-select').value,
+        q5: document.getElementById('q5-select').value
+    };
+    sessionStorage.setItem('gaiaFormData', JSON.stringify(formData));
+}
+
+// Restore form data from sessionStorage
+function restoreFormData() {
+    const saved = sessionStorage.getItem('gaiaFormData');
+    if (!saved) return;
+
+    const formData = JSON.parse(saved);
+
+    // Restore textarea
+    document.getElementById('q1-input').value = formData.q1 || '';
+
+    // Restore selected buttons
+    if (formData.q2 && formData.q2.length) {
+        document.querySelectorAll('#q2-grid .selectable-btn').forEach(btn => {
+            if (formData.q2.includes(btn.innerText)) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    // Restore dropdowns
+    if (formData.q3) document.getElementById('q3-select').value = formData.q3;
+    if (formData.q4) document.getElementById('q4-select').value = formData.q4;
+    if (formData.q5) document.getElementById('q5-select').value = formData.q5;
+}
+
 // Initialize Buttons
 function initGrid(gridId, data) {
     const grid = document.getElementById(gridId);
@@ -20,7 +57,10 @@ function initGrid(gridId, data) {
         btn.className = 'selectable-btn';
         btn.innerText = item.name;
         btn.dataset.value = item.val;
-        btn.onclick = () => btn.classList.toggle('active');
+        btn.onclick = () => {
+            btn.classList.toggle('active');
+            saveFormData();
+        };
         grid.appendChild(btn);
     });
 }
@@ -73,8 +113,9 @@ function calculateResults() {
         desc = "Ground-up engineering. Zero templates. Pure technical innovation.";
     }
 
-    document.getElementById('discovery-form').classList.add('hidden');
+    // Keep form visible, just show results below
     document.getElementById('results').classList.remove('hidden');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
     
     document.getElementById('result-content').innerHTML = `
         <p><strong>Client Need:</strong> ${why}</p>
@@ -93,3 +134,12 @@ setInterval(() => {
 
 initGrid('q2-grid', products);
 initDropdown('q3-select', stacks);
+
+// Add event listeners for saving form data
+document.getElementById('q1-input').addEventListener('input', saveFormData);
+document.getElementById('q3-select').addEventListener('change', saveFormData);
+document.getElementById('q4-select').addEventListener('change', saveFormData);
+document.getElementById('q5-select').addEventListener('change', saveFormData);
+
+// Restore saved data on page load
+restoreFormData();

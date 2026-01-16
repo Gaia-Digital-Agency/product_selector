@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia Digital | Portfolio</title>
+    <link rel="stylesheet" href="../src/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../asset/gaiada.jpeg" alt="Gaia Logo" class="logo">
+            <h1>Our Portfolio</h1>
+            <nav class="nav-links">
+                <a href="../index.html">Project Estimator</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+            </nav>
+        </header>
+
+        <section id="portfolio-grid">
+        </section>
+
+        <footer>
+            <div class="footer-info">
+                <span>Visitors: <strong id="visitor-count">1,248</strong></span>
+                <span>Location: <strong>Denpasar, Bali</strong></span>
+                <span>Current Time: <strong id="current-time"></strong></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Load and display portfolio sites
+        fetch('../asset/sites.json')
+            .then(response => response.json())
+            .then(sites => {
+                const grid = document.getElementById('portfolio-grid');
+                sites.forEach(url => {
+                    // Extract site name from URL
+                    const hostname = new URL(url).hostname.replace('www.', '');
+                    const siteName = hostname.split('.')[0]
+                        .split('-')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
+
+                    const card = document.createElement('a');
+                    card.href = url;
+                    card.target = '_blank';
+                    card.rel = 'noopener noreferrer';
+                    card.className = 'portfolio-card';
+                    card.innerHTML = `
+                        <div class="portfolio-content">
+                            <h3>${siteName}</h3>
+                            <p class="portfolio-url">${hostname}</p>
+                        </div>
+                        <span class="portfolio-arrow">&#8599;</span>
+                    `;
+                    grid.appendChild(card);
+                });
+            });
+
+        // Time display
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('current-time').innerText = now.toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>

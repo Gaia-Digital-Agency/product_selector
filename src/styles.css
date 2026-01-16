@@ -24,6 +24,29 @@ body {
 header { text-align: center; margin-bottom: 40px; }
 .logo { height: 50px; margin-bottom: 10px; }
 
+.nav-links {
+    margin-top: 15px;
+}
+
+.nav-links a {
+    color: #888;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--text);
+}
+
+.nav-links a.active {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: #000;
+    font-weight: 600;
+}
+
 .card {
     background: var(--card-bg);
     border: 1px solid rgba(255,255,255,0.1);
@@ -100,6 +123,55 @@ footer {
 }
 
 .footer-info span { margin: 0 15px; }
+
+/* Portfolio page */
+#portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.portfolio-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.portfolio-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+}
+
+.portfolio-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.portfolio-url {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.portfolio-arrow {
+    font-size: 1.5rem;
+    color: var(--primary);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.portfolio-card:hover .portfolio-arrow {
+    opacity: 1;
+}
 
 @media print {
     .btn-calculate, .btn-secondary, .button-grid, select, .helper-text, footer { display: none !important; }
